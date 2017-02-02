@@ -83,14 +83,22 @@ class LinkedList {
             }
         }
 
-        return this.getNodeByIndex(index);
+        return this;
     }
 
     reverse() {
         return this;
     }
 
-    indexOf(data) {}
+    indexOf(data) {
+        let current = this._head;
+        for (let i = 0; i < this.length; i++){
+            if (current.data == data)
+                return i;
+            current = current.next;
+        }
+        return -1;
+    }
 }
 
 module.exports = LinkedList;
