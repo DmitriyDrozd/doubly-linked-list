@@ -41,11 +41,45 @@ class LinkedList {
         this.getNodeByIndex(index).data = data;
     }
 
-    isEmpty() {}
+    isEmpty() {
+        return !this.length;
+    }
 
-    clear() {}
+    clear() {
+        this._head.prev = null;
+        this._head.data = null;
+        this._head.next = null;
+        this._tail.prev = null;
+        this._tail.data = null;
+        this._tail.next = null;
+        this.length = 0;
+    }
 
-    deleteAt(index) {}
+    deleteAt(index) {
+        if (!this.isEmpty()) {
+            if (this.length == 1) {
+                this.clear();
+                return;
+            }
+
+            let nodeToDelete = this.getNodeByIndex(index);
+            let prevNode = this.getNodeByIndex(--index);
+
+            if (nodeToDelete == this._tail) {
+                this._tail = prevNode;
+                this._tail.next = null;
+            }
+            else if (nodeToDelete == this._head) {
+                this._head = this._head.next;
+            }
+            else {
+                prevNode.next = nodeToDelete.next;
+                nodeToDelete.next.prev = prevNode;
+            }
+
+            this.length--;
+        }
+    }
 
     reverse() {}
 
