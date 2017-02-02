@@ -15,6 +15,8 @@ class LinkedList {
             this._tail = node;
         }
         this.length++;
+
+        return node;
     }
 
     head() {
@@ -38,7 +40,9 @@ class LinkedList {
     }
 
     insertAt(index, data) {
-        this.getNodeByIndex(index).data = data;
+        let current = this.getNodeByIndex(index);
+        current.data = data;
+        return current;
     }
 
     isEmpty() {
@@ -61,6 +65,7 @@ class LinkedList {
                 this.clear();
                 return;
             }
+            this.length--;
 
             let nodeToDelete = this.getNodeByIndex(index);
             let prevNode = this.getNodeByIndex(--index);
@@ -76,12 +81,14 @@ class LinkedList {
                 prevNode.next = nodeToDelete.next;
                 nodeToDelete.next.prev = prevNode;
             }
-
-            this.length--;
         }
+
+        return this.getNodeByIndex(index);
     }
 
-    reverse() {}
+    reverse() {
+        return this;
+    }
 
     indexOf(data) {}
 }
