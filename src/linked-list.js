@@ -25,15 +25,21 @@ class LinkedList {
         return this._tail.data;
     }
 
-    at(index) {
+    getNodeByIndex(index) {
         let current = this._head;
         for (let i = 0; i < index; i++){
             current = current.next;
         }
-        return current.data;
+        return current;
     }
 
-    insertAt(index, data) {}
+    at(index) {
+        return this.getNodeByIndex(index).data;
+    }
+
+    insertAt(index, data) {
+        this.getNodeByIndex(index).data = data;
+    }
 
     isEmpty() {}
 
