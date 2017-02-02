@@ -6,7 +6,8 @@ class LinkedList {
     }
 
     append(data) {
-        let node = new Node(data);
+        let node = new Node(data, this._tail, null);
+
         if (this.length == 0) {
             this._head = this._tail = node;
         }
@@ -16,7 +17,7 @@ class LinkedList {
         }
         this.length++;
 
-        return node;
+        return this;
     }
 
     head() {
@@ -42,7 +43,7 @@ class LinkedList {
     insertAt(index, data) {
         let current = this.getNodeByIndex(index);
         current.data = data;
-        return current;
+        return this;
     }
 
     isEmpty() {
@@ -71,7 +72,7 @@ class LinkedList {
             let prevNode = this.getNodeByIndex(--index);
 
             if (nodeToDelete == this._tail) {
-                this._tail = prevNode;
+                this._tail = this._tail.prev;
                 this._tail.next = null;
             }
             else if (nodeToDelete == this._head) {
@@ -87,6 +88,21 @@ class LinkedList {
     }
 
     reverse() {
+        let current = null;
+        let swap = null;
+
+        for (let i = 0; i < this.length; i++) {
+            current = i == 0? this._tail : current.next;
+
+            swap = current.prev;
+            current.prev = current.next;
+            current.next = swap;
+
+            if (i == 0)
+                this._head = current;
+        }
+        this._tail = current;
+
         return this;
     }
 
