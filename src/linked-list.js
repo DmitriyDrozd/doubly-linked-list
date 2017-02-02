@@ -43,6 +43,7 @@ class LinkedList {
     insertAt(index, data) {
         let current = this.getNodeByIndex(index);
         current.data = data;
+
         return this;
     }
 
@@ -58,29 +59,32 @@ class LinkedList {
         this._tail.data = null;
         this._tail.next = null;
         this.length = 0;
+
+        return this;
     }
 
     deleteAt(index) {
         if (!this.isEmpty()) {
             if (this.length == 1) {
                 this.clear();
-                return;
-            }
-            this.length--;
-
-            let nodeToDelete = this.getNodeByIndex(index);
-            let prevNode = this.getNodeByIndex(--index);
-
-            if (nodeToDelete == this._tail) {
-                this._tail = this._tail.prev;
-                this._tail.next = null;
-            }
-            else if (nodeToDelete == this._head) {
-                this._head = this._head.next;
             }
             else {
-                prevNode.next = nodeToDelete.next;
-                nodeToDelete.next.prev = prevNode;
+                this.length--;
+
+                let nodeToDelete = this.getNodeByIndex(index);
+                let prevNode = this.getNodeByIndex(--index);
+
+                if (nodeToDelete == this._tail) {
+                    this._tail = this._tail.prev;
+                    this._tail.next = null;
+                }
+                else if (nodeToDelete == this._head) {
+                    this._head = this._head.next;
+                }
+                else {
+                    prevNode.next = nodeToDelete.next;
+                    nodeToDelete.next.prev = prevNode;
+                }
             }
         }
 
