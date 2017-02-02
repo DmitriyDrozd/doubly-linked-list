@@ -11,8 +11,10 @@ class LinkedList {
             this._head = this._tail = node;
         }
         else {
+            this._tail.next = node;
             this._tail = node;
         }
+        this.length++;
     }
 
     head() {
@@ -23,7 +25,13 @@ class LinkedList {
         return this._tail.data;
     }
 
-    at(index) {}
+    at(index) {
+        let current = this._head;
+        for (let i = 0; i < index; i++){
+            current = current.next;
+        }
+        return current.data;
+    }
 
     insertAt(index, data) {}
 
